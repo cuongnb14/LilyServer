@@ -11,11 +11,21 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 from __future__ import absolute_import, unicode_literals
 
 import environ
+import aiml
 
 ROOT_DIR = environ.Path(__file__) - 3  # (lily_server/config/settings/common.py - 3 = lily_server/)
-APPS_DIR = ROOT_DIR.path('lily_server')
+APPS_DIR = ROOT_DIR.path('lily')
 
 env = environ.Env()
+
+# AIML CONFIGURATION
+# ------------------------------------------------------------------------------
+
+KERNEL = aiml.Kernel()
+KERNEL.learn(str(APPS_DIR.path('aiml/startup.xml')))
+KERNEL.respond("LOADLILY")
+
+
 
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -39,12 +49,14 @@ THIRD_PARTY_APPS = (
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
+    'rest_framework',
 )
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
     # custom users app
-    'lily_server.users.apps.UsersConfig',
+    'lily.users.apps.UsersConfig',
+    'lily.api'
     # Your stuff: custom apps go here
 )
 
@@ -66,7 +78,7 @@ MIDDLEWARE_CLASSES = (
 # MIGRATIONS CONFIGURATION
 # ------------------------------------------------------------------------------
 MIGRATION_MODULES = {
-    'sites': 'lily_server.contrib.sites.migrations'
+    'sites': 'lily.contrib.sites.migrations'
 }
 
 # DEBUG
@@ -214,8 +226,8 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
-ACCOUNT_ADAPTER = 'lily_server.users.adapters.AccountAdapter'
-SOCIALACCOUNT_ADAPTER = 'lily_server.users.adapters.SocialAccountAdapter'
+ACCOUNT_ADAPTER = 'lily.users.adapters.AccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'lily.users.adapters.SocialAccountAdapter'
 
 # Custom user app defaults
 # Select the correct user model

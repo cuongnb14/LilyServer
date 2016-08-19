@@ -57,10 +57,11 @@ node_modules/
 .env
 
 # User-uploaded media
-lily_server/media/
+lily/media/
 
 # Hitch directory
 tests/.hitch
 
 venv/
 
+.idea/
