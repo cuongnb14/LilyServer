@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0.1">
+    <!-- lily.aiml -->
+
+    <category>
+        <pattern>TRUY CAP *</pattern>
+        <template>
+            ACT OPEN
+            <star/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT ARE *</pattern>
+        <template>
+            I'm a bot,
+            <star/>
+        </template>
+    </category>
+
+</aiml>
