@@ -10,9 +10,14 @@ class LilyView(APIView):
         q = request.GET.get("q", "")
         if q:
             response = lily.respond(q)
-            pieces = str.split("::", response)
-            action = pieces[0]
-            params = pieces[1:]
-            return ok(action, params)
+            if response:
+                print("R:" + response)
+                pieces = response.split("::")
+                print(pieces)
+                action = pieces[0]
+                params = pieces[1:]
+                return ok(action, params)
+            else:
+                return fail()
         else:
             return fail()

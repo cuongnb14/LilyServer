@@ -2,6 +2,7 @@
 <aiml version="1.0.1">
     <!-- lily.aiml -->
 
+    <!-- OPEN_APP: Open application -->
     <category>
         <pattern>TRUY CAP *</pattern>
         <template>
@@ -10,27 +11,18 @@
     </category>
 
     <category>
-        <pattern>OPEN *</pattern>
-        <template>
-            ACT OPEN
-            <star/>
-        </template>
-    </category>
-
-    <category>
         <pattern>TRUY CẬP *</pattern>
         <template>
-            ACT OPEN
-            <star/>
+            <srai>TRUY CAP <star/></srai>
         </template>
     </category>
 
     <category>
-        <pattern>WHAT ARE *</pattern>
+        <pattern>MỞ ỨNG DỤNG * CHO *</pattern>
         <template>
-            I'm a bot,
-            <star/>
+            <srai>TRUY CAP <star index="1"/></srai>
         </template>
     </category>
+    <!-- END OPEN_APP -->
 
 </aiml>
