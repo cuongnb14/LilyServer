@@ -5,6 +5,21 @@
     <category>
         <pattern>TRUY CAP *</pattern>
         <template>
+            OPEN_APP::<star/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>OPEN *</pattern>
+        <template>
+            ACT OPEN
+            <star/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>TRUY CẬP *</pattern>
+        <template>
             ACT OPEN
             <star/>
         </template>

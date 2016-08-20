@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from django.conf import settings
 from rest_framework.response import Response
+from lily.api.utils import ok, fail
 
 
 class LilyView(APIView):
@@ -8,6 +9,10 @@ class LilyView(APIView):
         lily = settings.KERNEL
         q = request.GET.get("q", "")
         if q:
-            return Response(lily.respond(q))
+            response = lily.respond(q)
+            pieces = str.split("::", response)
+            action = pieces[0]
+            params = pieces[1:]
+            return ok(action, params)
         else:
-            return Response("404")
+            return fail()
