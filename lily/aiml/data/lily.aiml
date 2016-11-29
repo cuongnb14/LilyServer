@@ -25,4 +25,27 @@
     </category>
     <!-- END OPEN_APP -->
 
+    <category>
+        <pattern>* LA AI</pattern>
+        <template>
+            WIKI_SEARCH::<star/>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>* LA *</pattern>
+        <template>
+            WIKI_SEARCH::<star index="1"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>* LÀ *</pattern>
+        <template>
+            WIKI_SEARCH::<star index="1"/>
+        </template>
+    </category>
+
+
 </aiml>

@@ -56,7 +56,8 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     # custom users app
     'lily.users.apps.UsersConfig',
-    'lily.api'
+    'lily.api',
+    'lily.webapp',
     # Your stuff: custom apps go here
 )
 

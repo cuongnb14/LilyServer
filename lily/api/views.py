@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from django.conf import settings
 from rest_framework.response import Response
 from lily.api.utils import ok, fail
+import wikipedia
 
 
 class LilyView(APIView):
@@ -11,11 +12,20 @@ class LilyView(APIView):
         if q:
             response = lily.respond(q)
             if response:
-                print("R:" + response)
                 pieces = response.split("::")
-                print(pieces)
                 action = pieces[0]
-                params = pieces[1:]
+                if action == "WIKI_SEARCH":
+                    try:
+                        wikipedia.set_lang("vi")
+                        params = [wikipedia.summary(pieces[1])]
+                    except Exception:
+                        try:
+                            wikipedia.set_lang("en")
+                            params = [wikipedia.summary(pieces[1])]
+                        except Exception:
+                            params = ["Xin lỗi, Tôi chưa được học điều này!"]
+                else:
+                    params = pieces[1:]
                 return ok(action, params)
             else:
                 return fail()
