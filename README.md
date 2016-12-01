@@ -14,7 +14,7 @@ pip3 install -e git+https://github.com/tranhuucuong91/Py3kAiml.git#egg=pip
 
 Run server: `python3 manage.py runserver`
 
-Access: `localhost:8000/webapp`
+Access: `localhost:8000`
 
 ## Process message
 
