@@ -51,4 +51,5 @@ redis>=2.10.0
 
 # Your custom requirements go here
 djangorestframework==3.4.0
+wikipedia==1.4.0
 #pip3 install -e git+https://github.com/tranhuucuong91/Py3kAiml.git#egg=pip
