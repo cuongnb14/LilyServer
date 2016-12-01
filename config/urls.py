@@ -10,7 +10,7 @@ from django.views import defaults as default_views
 
 urlpatterns = [
     url(r'^v1/', include('lily.api.urls', namespace='lily')),
-    url(r'^webapp/', include('lily.webapp.urls', namespace='webapp')),
+    url(r'^', include('lily.webapp.urls', namespace='webapp')),
 ]
 
 
