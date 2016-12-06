@@ -25,8 +25,6 @@ KERNEL = aiml.Kernel()
 KERNEL.learn(str(APPS_DIR.path('aiml/startup.xml')))
 KERNEL.respond("LOADLILY")
 
-
-
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
 DJANGO_APPS = (
@@ -82,6 +80,20 @@ MIGRATION_MODULES = {
     'sites': 'lily.contrib.sites.migrations'
 }
 
+# CACHES CONFIGURATION
+# ------------------------------------------------------------------------------
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": env('REDIS_LOCATION', default='redis://172.17.0.1:6379/1'),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+CACHE_TTL = 60 * 60 * 1  # Cache time to live is 1 hours.
+
 # DEBUG
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
@@ -117,7 +129,6 @@ DATABASES = {
         'NAME': 'lily.database',
     }
 }
-
 
 # GENERAL CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -239,7 +250,6 @@ LOGIN_URL = 'account_login'
 
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
-
 
 # django-compressor
 # ------------------------------------------------------------------------------

@@ -17,7 +17,7 @@ services:
             - "0.0.0.0:8000:8000"
         volumes:
             - .:/usr/src/app
-        # env_file: docker-env
+        env_file: docker-env
         environment:
             DJANGO_SETTINGS_MODULE: 'config.settings.local'
             # DJANGO_SETTINGS_MODULE: 'config.settings.production'
