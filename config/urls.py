@@ -7,12 +7,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^v1/', include('lily.api.urls', namespace='lily')),
     url(r'^', include('lily.webapp.urls', namespace='webapp')),
 ]
 
+urlpatterns += staticfiles_urlpatterns()
 
 urlpatterns += [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),

@@ -2,3 +2,7 @@
 !.coveragerc
 !.env
 !.pylintrc
+
+compose/
+mysql-data/
+venv/

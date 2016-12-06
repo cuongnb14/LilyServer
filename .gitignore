@@ -63,5 +63,6 @@ lily/media/
 tests/.hitch
 
 venv/
+mysql-data/
 
 .idea/

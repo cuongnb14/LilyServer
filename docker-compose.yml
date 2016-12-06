@@ -1,37 +1,53 @@
-version: '2'
+#
+# syntax: https://docs.docker.com/compose/yml/
+# author: cuongnb14@gmail.com
+#
 
-volumes:
-  postgres_data: {}
-  postgres_backup: {}
+version: "2"
 
 services:
-  postgres:
-    build: ./compose/postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - postgres_backup:/backups
-    env_file: .env
+    lily:
+        #restart: always
+        image: cuongnb14/lily_api:0.1
+        networks:
+            - nginx-back
+        expose:
+            - "8000"
+        ports:
+            - "0.0.0.0:8000:8000"
+        volumes:
+            - .:/usr/src/app
+        # env_file: docker-env
+        environment:
+            DJANGO_SETTINGS_MODULE: 'config.settings.local'
+            # DJANGO_SETTINGS_MODULE: 'config.settings.production'
+        cpu_shares: 512             # 0.5 CPU
+        mem_limit: 1036870912        # 1 G RAM
+        #command: /usr/local/bin/gunicorn config.wsgi:application -w 2 -b :8000
 
-  django:
-    build:
-      context: .
-      dockerfile: ./compose/django/Dockerfile
-    user: django
-    depends_on:
-      - postgres
-      - redis
-    command: /gunicorn.sh
-    env_file: .env
+    redis:
+        image: redis
+        networks:
+            - nginx-back
+        # ports:
+            # - "0.0.0.0:6379:6379"
+        hostname: redis
+        cpu_shares: 512
+        mem_limit: 536870912
+       # restart: always
 
-  nginx:
-    build: ./compose/nginx
-    depends_on:
-      - django
+    mysql:
+        image: mysql:5.7
+        volumes:
+            - ./mysql-data/:/var/lib/mysql/
+        ports:
+            - "127.0.0.1:3309:3306"
+        env_file: docker-env
+        networks:
+            - nginx-back
+        cpu_shares: 512             # 0.5 CPU
+        mem_limit: 1073741824       # 1024 MB RAM
 
-    ports:
-      - "0.0.0.0:80:80"
 
-
-  redis:
-    image: redis:latest
-
+networks:
+    nginx-back:
