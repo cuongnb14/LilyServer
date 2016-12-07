@@ -29,8 +29,8 @@ services:
         image: redis
         networks:
             - nginx-back
-        # ports:
-            # - "0.0.0.0:6379:6379"
+        ports:
+            - "0.0.0.0:6379:6379"
         hostname: redis
         cpu_shares: 512
         mem_limit: 536870912

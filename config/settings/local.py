@@ -26,7 +26,7 @@ DATABASES = {
         'USER': env('DB_USER', default='root'),
         'PASSWORD': env('DB_PASS', default='123456'),
         'HOST': env('DB_HOST', default='127.0.0.1'),
-        'PORT': env('DB_PORT', default=3308),
+        'PORT': env('DB_PORT', default=3309),
     }
 }
 
