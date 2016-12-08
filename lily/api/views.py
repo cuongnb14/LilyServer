@@ -4,6 +4,7 @@ from django.views.decorators.cache import cache_page
 from django.conf import settings
 from lily.api.utils import ok, fail, get_wiki
 from .models import Query
+import traceback
 
 
 class LilyView(APIView):
@@ -25,9 +26,11 @@ class LilyView(APIView):
                         try:
                             params = get_wiki(pieces[1], "vi")
                         except Exception:
+                            traceback.print_exc()
                             try:
                                 params = get_wiki(pieces[1], "en")
                             except Exception:
+                                traceback.print_exc()
                                 params = ["Xin lỗi, Tôi chưa được học điều này!"]
                 else:
                     params = pieces[1:]
